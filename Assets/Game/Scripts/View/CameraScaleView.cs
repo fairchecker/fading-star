@@ -17,7 +17,7 @@ namespace View
             if ((_cameraFollow.FollowOffset.y < 30 && newScale < 0) ||
                 (_cameraFollow.FollowOffset.y > 5 && newScale > 0))
                 _cameraFollow.FollowOffset =
-                    new Vector3(0, _cameraFollow.FollowOffset.y - newScale * 150f * Time.deltaTime, -25);
+                    new Vector3(_cameraFollow.FollowOffset.x, _cameraFollow.FollowOffset.y - newScale * 150f * Time.deltaTime, _cameraFollow.FollowOffset.z);
         }
     }
 }
