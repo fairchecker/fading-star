@@ -8,7 +8,7 @@ namespace Controller
     {
         public static InputSystem_Actions Actions;
         private IMovable _actor;
-        private GunScript _gunScript;
+        [SerializeField] private GunScript gunScript;
         private void Awake()
         {
             Actions = new InputSystem_Actions();
@@ -25,7 +25,7 @@ namespace Controller
 
         private void OnShootPerformed(InputAction.CallbackContext ctx)
         {
-            _gunScript.Shoot();
+            gunScript.Shoot();
         }
         
         private void GetMousePosition()

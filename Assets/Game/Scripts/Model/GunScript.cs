@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class GunScript : MonoBehaviour
@@ -10,13 +11,17 @@ public class GunScript : MonoBehaviour
     [SerializeField] Material bulletMaterial;
     [SerializeField] float bulletSpeed = 100f;
     [SerializeField] float spreadAngle = 10f;
+    
+    private CinemachineImpulseSource _impulseSource;
 
     bool canShoot = true;
 
     public void Shoot()
     {
         if (!canShoot) return;
-
+        
+        _impulseSource.GenerateImpulse();
+        
         for (int i = 0; i < bulletsCount; i++)
         {
             GameObject tmp = new GameObject("Bullet");
@@ -28,7 +33,7 @@ public class GunScript : MonoBehaviour
             // Добавляем случайное отклонение
             Quaternion randomSpread = Quaternion.Euler(
                 Random.Range(-spreadAngle, spreadAngle), // Отклонение по вертикали
-                Random.Range(-spreadAngle, spreadAngle) + 90, // Отклонение по горизонтали
+                Random.Range(-spreadAngle, spreadAngle), // Отклонение по горизонтали
                 0f); 
 
             direction = randomSpread * direction; // Применяем разброс
@@ -59,6 +64,11 @@ public class GunScript : MonoBehaviour
     private void Reload()
     {
         canShoot = true;
+    }
+
+    private void Awake()
+    {
+        _impulseSource = GetComponent<CinemachineImpulseSource>();
     }
     
 }
